@@ -252,7 +252,10 @@ void CFE_TIME_TaskPipe(const CFE_SB_Buffer_t *SBBufPtr)
         /*
         ** Time at the tone "data"...
         */
-        CFE_TIME_ToneDataCmd((const CFE_TIME_ToneDataCmd_t *)SBBufPtr);
+        if (CFE_TIME_VerifyCmdLength(&SBBufPtr->Msg, sizeof(CFE_TIME_ToneDataCmd_t)))
+        {
+            CFE_TIME_ToneDataCmd((const CFE_TIME_ToneDataCmd_t *)SBBufPtr);
+        }
     }
     else if (CFE_SB_MsgId_Equal(MessageID, TONE_CMD_MID))
     {
