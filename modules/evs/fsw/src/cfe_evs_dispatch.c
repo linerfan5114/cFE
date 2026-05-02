@@ -59,7 +59,10 @@ void CFE_EVS_ProcessCommandPacket(const CFE_SB_Buffer_t *SBBufPtr)
     if (CFE_SB_MsgId_Equal(MessageID, SEND_HK_MID))
     {
         /* Housekeeping request */
-        CFE_EVS_SendHkCmd((const CFE_EVS_SendHkCmd_t *)SBBufPtr);
+        if (CFE_EVS_VerifyCmdLength(&SBBufPtr->Msg, sizeof(CFE_EVS_SendHkCmd_t)))
+        {
+            CFE_EVS_SendHkCmd((const CFE_EVS_SendHkCmd_t *)SBBufPtr);
+        }
     }
     else if (CFE_SB_MsgId_Equal(MessageID, CMD_MID))
     {
