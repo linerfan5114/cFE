@@ -633,7 +633,7 @@ CFE_Status_t CFE_FS_ExtractFilenameFromPath(const char *OriginalPath, char *File
         /*
         ** Verify the filename isn't too long
         */
-        if ((StringLength - (DirMarkIdx + 1)) < OS_MAX_PATH_LEN)
+        if ((StringLength - (DirMarkIdx + 1)) < OS_MAX_FILE_NAME)
         {
             /*
             ** Extract the filename portion
